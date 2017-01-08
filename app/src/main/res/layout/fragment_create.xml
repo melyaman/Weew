@@ -2,19 +2,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="preferences.android.eurecom.fr.weew3.Create">
+    tools:context="preferences.android.eurecom.fr.weew3.Create"
+    android:padding="5dp">
 
     <!-- TODO: Update blank fragment layout -->
-    <Button
-        android:layout_width="wrap_content"
+
+
+    <TextView
+        android:text="Event Type"
+        android:textColor="#0000FF"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create fragment goes here"
-        android:padding="8dp"
-        android:textColor="#fff"
-        android:background="@color/colorPrimary"
-        android:textSize="28sp"
-        android:id="@+id/create_button"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/text_event_type"
+        android:layout_marginTop="50dp"/>
+
+    <Spinner
+        android:id="@+id/eventTypeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:minWidth="200dp"
+        android:entries="@array/event_choices"
+        android:layout_below="@id/text_event_type"
+        />
+
+
 
 </RelativeLayout>
