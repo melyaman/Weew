@@ -21,10 +21,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:minWidth="200dp"
         android:entries="@array/event_choices"
         android:layout_below="@id/text_event_type"
         />
+    <TextView
+        android:text="Event Date"
+        android:textColor="#0000FF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_event_date"
+        android:layout_below="@id/eventTypeSpinner"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="DD/MM/YYYY"
+        android:ems="10"
+        android:id="@+id/eventDateText"
+        android:focusable="false"
+        android:drawableLeft="@drawable/calendar_icon"
+        android:layout_below="@id/text_event_date"/>
 
 
 
