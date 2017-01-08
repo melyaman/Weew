@@ -2,6 +2,7 @@ package preferences.android.eurecom.fr.weew3;
 
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.os.Build;
@@ -16,7 +17,9 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 
+import java.sql.Time;
 import java.util.Locale;
 
 
@@ -47,8 +50,11 @@ public class Create extends Fragment {
         spinner.setAdapter(adapter);
         ///// calendar popup ////
         final EditText edittext;
+        final EditText timetext;
+        timetext = (EditText) rootView.findViewById(R.id.eventTimeText);
         edittext = (EditText) rootView.findViewById(R.id.eventDateText);
         final Calendar myCalendar = Calendar.getInstance();
+
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
@@ -79,8 +85,28 @@ public class Create extends Fragment {
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
 
             }
-
         });
+
+        timetext.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    // TODO Auto-generated method stub
+                    Calendar mcurrentTime = Calendar.getInstance();
+                    int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                    int minute = mcurrentTime.get(Calendar.MINUTE);
+                    TimePickerDialog mTimePicker;
+                    mTimePicker = new TimePickerDialog(rootView.getContext(), new TimePickerDialog.OnTimeSetListener() {
+                        @Override
+                        public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                            timetext.setText( "" + selectedHour + ":" + selectedMinute);
+                        }
+                    }, hour, minute, true);
+                    mTimePicker.setTitle("Select Time");
+                    mTimePicker.show();
+                }
+            });
+
         return rootView;
     }
 }
