@@ -36,12 +36,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="DD/MM/YYYY"
         android:ems="10"
         android:id="@+id/eventDateText"
         android:focusable="false"
         android:drawableLeft="@drawable/ic_calendar"
-        android:layout_below="@id/text_event_date"/>
+        android:layout_below="@id/text_event_date"
+        android:ellipsize="start"
+        android:gravity="center"
+        android:hint="Pick a Date"
+        android:background="@drawable/edit_text_style"/>
     <TextView
         android:text="Event Time"
         android:textColor="#0000FF"
@@ -53,12 +56,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="HH:MM"
         android:ems="10"
         android:id="@+id/eventTimeText"
         android:focusable="false"
         android:drawableLeft="@drawable/ic_clock"
-        android:layout_below="@id/text_event_time"/>
+        android:layout_below="@id/text_event_time"
+        android:ellipsize="start"
+        android:gravity="center"
+        android:hint="Pick starting time"
+        android:background="@drawable/edit_text_style"/>
 
 
 </RelativeLayout>
