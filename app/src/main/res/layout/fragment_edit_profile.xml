@@ -18,27 +18,50 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <EditText
-        android:layout_width="wrap_content"
+    <Button
+        android:text="Submit"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dip"
+        android:background="#ea4c88"
+        android:textColor="@color/white"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="New Password"
-        android:ems="10"
-        android:layout_below="@+id/editText"
-        android:layout_alignRight="@+id/editText"
-        android:layout_alignEnd="@+id/editText"
-        android:layout_marginTop="33dp"
-        android:id="@+id/editText4" />
+        android:id="@+id/submit" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:background="@color/input_register_bg"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textColor="@color/input_register"
+        android:textColorHint="@color/input_register_hint"
         android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_marginBottom="33dp"
         android:inputType="textPersonName"
         android:text="New Username"
         android:ems="10"
-        android:layout_marginTop="49dp"
-        android:id="@+id/editText"
-        android:layout_below="@+id/edit_imageProfile"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/new_username"
+        android:layout_above="@+id/new_password"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="13dp"
+        android:layout_marginEnd="13dp" />
+
+    <EditText
+        android:background="@color/input_register_bg"
+        android:text="New Password"
+        android:ems="10"
+        android:id="@+id/new_password"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textColor="@color/input_register"
+        android:textColorHint="@color/input_register_hint"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_marginBottom="12dp"
+        android:layout_above="@+id/submit"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
