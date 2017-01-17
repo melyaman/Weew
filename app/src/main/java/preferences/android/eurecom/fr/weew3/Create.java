@@ -126,7 +126,7 @@ public class Create extends Fragment {
                 }, hour, minute, true);
                 mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
-                System.out.println(spinner);
+                System.out.println(spinner.getSelectedItem().toString());
                 System.out.println(edittext.getText());
                 System.out.println(startText.getText());
                 System.out.println(endText.getText());

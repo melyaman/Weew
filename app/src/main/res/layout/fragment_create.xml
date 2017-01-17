@@ -10,12 +10,13 @@
 
     <TextView style="@android:style/TextAppearance.Large"
         android:text="Event Type"
-        android:textColor="#0000FF"
+        android:textColor="@color/btn_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/text_event_type"
         android:layout_marginTop="50dp"
-        android:padding="10dp" />
+        android:padding="10dp"
+        />
 
     <Spinner style="@android:style/TextAppearance.Large"
         android:id="@+id/eventTypeSpinner"
@@ -27,7 +28,7 @@
         android:padding="10dp" />
     <TextView style="@android:style/TextAppearance.Large"
         android:text="Event Date"
-        android:textColor="#0000FF"
+        android:textColor="@color/btn_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/text_event_date"
@@ -49,7 +50,7 @@
         android:background="@drawable/edit_text_style"/>
     <TextView style="@android:style/TextAppearance.Large"
         android:text="Start Time"
-        android:textColor="#0000FF"
+        android:textColor="@color/btn_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/text_event_start"
@@ -70,7 +71,7 @@
         android:background="@drawable/edit_text_style"/>
     <TextView style="@android:style/TextAppearance.Large"
         android:text="End Time"
-        android:textColor="#0000FF"
+        android:textColor="@color/btn_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/text_event_end"
@@ -91,7 +92,7 @@
         android:background="@drawable/edit_text_style"/>
     <TextView style="@android:style/TextAppearance.Large"
         android:text="Description"
-        android:textColor="#0000FF"
+        android:textColor="@color/btn_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/text_event_description"
@@ -111,6 +112,16 @@
         android:layout_alignParentEnd="true"
         android:hint="Write Event Description"
         android:gravity="center"/>
+    <Button
+        android:text="Create"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dip"
+        android:background="#ea4c88"
+        android:textColor="@color/white"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/submitEvent" />
 
 
 </RelativeLayout>
