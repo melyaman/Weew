@@ -1,127 +1,169 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="preferences.android.eurecom.fr.weew3.Create"
-    android:padding="5dp">
+    android:fillViewport="true"
+    android:scrollbars="none" >
 
-    <!-- TODO: Update blank fragment layout -->
+        <RelativeLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="preferences.android.eurecom.fr.weew3.Create"
+            android:padding="5dp">
 
-
-    <TextView style="@android:style/TextAppearance.Large"
-        android:text="Event Type"
-        android:textColor="@color/btn_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/text_event_type"
-        android:layout_marginTop="50dp"
-        android:padding="10dp"
-        />
-
-    <Spinner style="@android:style/TextAppearance.Large"
-        android:id="@+id/eventTypeSpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:entries="@array/event_choices"
-        android:layout_below="@id/text_event_type"
-        android:padding="10dp" />
-    <TextView style="@android:style/TextAppearance.Large"
-        android:text="Event Date"
-        android:textColor="@color/btn_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/text_event_date"
-        android:layout_below="@id/eventTypeSpinner"
-        android:padding="10dp" />
-
-    <EditText style="@android:style/TextAppearance.Large"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/eventDateText"
-        android:focusable="false"
-        android:drawableLeft="@drawable/ic_calendar"
-        android:layout_below="@id/text_event_date"
-        android:ellipsize="start"
-        android:gravity="center"
-        android:hint="Pick a Date"
-        android:background="@drawable/edit_text_style"/>
-    <TextView style="@android:style/TextAppearance.Large"
-        android:text="Start Time"
-        android:textColor="@color/btn_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/text_event_start"
-        android:layout_below="@id/eventDateText"
-        android:padding="10dp" />
-    <EditText style="@android:style/TextAppearance.Large"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/eventStartText"
-        android:focusable="false"
-        android:drawableLeft="@drawable/ic_clock"
-        android:layout_below="@id/text_event_start"
-        android:ellipsize="start"
-        android:gravity="center"
-        android:hint="Pick starting time"
-        android:background="@drawable/edit_text_style"/>
-    <TextView style="@android:style/TextAppearance.Large"
-        android:text="End Time"
-        android:textColor="@color/btn_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/text_event_end"
-        android:layout_below="@id/eventStartText"
-        android:padding="10dp" />
-    <EditText style="@android:style/TextAppearance.Large"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/eventEndText"
-        android:focusable="false"
-        android:drawableLeft="@drawable/ic_clock"
-        android:layout_below="@id/text_event_end"
-        android:ellipsize="start"
-        android:gravity="center"
-        android:hint="Pick End time"
-        android:background="@drawable/edit_text_style"/>
-    <TextView style="@android:style/TextAppearance.Large"
-        android:text="Description"
-        android:textColor="@color/btn_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/text_event_description"
-        android:layout_below="@id/eventEndText"
-        android:padding="10dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:layout_below="@+id/text_event_description"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="14dp"
-        android:id="@+id/editText"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:hint="Write Event Description"
-        android:gravity="center"/>
-    <Button
-        android:text="Create"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dip"
-        android:background="#ea4c88"
-        android:textColor="@color/white"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/submitEvent" />
+            <!-- TODO: Update blank fragment layout -->
 
 
-</RelativeLayout>
+            <TextView style="@android:style/TextAppearance.Large"
+                android:text="Event Type"
+                android:textColor="@color/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_event_type"
+                android:layout_marginTop="50dp"
+                android:padding="10dp"
+                />
+
+            <Spinner style="@android:style/TextAppearance.Large"
+                android:id="@+id/eventTypeSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:entries="@array/event_choices"
+                android:layout_below="@id/text_event_type"
+                android:padding="10dp" />
+
+            <TextView style="@android:style/TextAppearance.Large"
+                android:text="Event Date"
+                android:textColor="@color/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_event_date"
+                android:layout_below="@id/eventTypeSpinner"
+                android:padding="10dp" />
+
+            <EditText style="@android:style/TextAppearance.Large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/eventDateText"
+                android:focusable="false"
+                android:drawableLeft="@drawable/ic_calendar"
+                android:layout_below="@id/text_event_date"
+                android:ellipsize="start"
+                android:gravity="center"
+                android:hint="Pick a Date"
+                android:background="@drawable/edit_text_style"/>
+
+            <TextView style="@android:style/TextAppearance.Large"
+                android:text="Start Time"
+                android:textColor="@color/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_event_start"
+                android:layout_below="@id/eventDateText"
+                android:padding="10dp" />
+
+            <EditText style="@android:style/TextAppearance.Large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/eventStartText"
+                android:focusable="false"
+                android:drawableLeft="@drawable/ic_clock"
+                android:layout_below="@id/text_event_start"
+                android:ellipsize="start"
+                android:gravity="center"
+                android:hint="Pick starting time"
+                android:background="@drawable/edit_text_style"/>
+
+            <TextView style="@android:style/TextAppearance.Large"
+                android:text="End Time"
+                android:textColor="@color/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_event_end"
+                android:layout_below="@id/eventStartText"
+                android:padding="10dp" />
+
+            <EditText style="@android:style/TextAppearance.Large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/eventEndText"
+                android:focusable="false"
+                android:drawableLeft="@drawable/ic_clock"
+                android:layout_below="@id/text_event_end"
+                android:ellipsize="start"
+                android:gravity="center"
+                android:hint="Pick End time"
+                android:background="@drawable/edit_text_style"/>
+
+            <TextView style="@android:style/TextAppearance.Large"
+                android:text="Description"
+                android:textColor="@color/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_event_description"
+                android:layout_below="@id/eventEndText"
+                android:padding="10dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:layout_below="@+id/text_event_description"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="14dp"
+                android:id="@+id/descriptionText"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="Write Event Description"
+                android:gravity="center"/>
+
+            <TextView style="@android:style/TextAppearance.Large"
+                android:text="Description"
+                android:textColor="@color/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_event_location"
+                android:layout_below="@id/descriptionText"
+                android:padding="10dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:layout_below="@+id/text_event_location"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="14dp"
+                android:id="@+id/locationText"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="Choose Location"
+                android:gravity="center"/>
+
+            <Button
+                android:text="Create"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/locationText"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="20dip"
+                android:background="#ea4c88"
+                android:textColor="@color/white"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/submitEvent" />
+
+
+        </RelativeLayout>
+
+</ScrollView>
