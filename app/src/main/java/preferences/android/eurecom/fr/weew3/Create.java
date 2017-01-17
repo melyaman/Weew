@@ -50,8 +50,10 @@ public class Create extends Fragment {
         spinner.setAdapter(adapter);
         ///// calendar popup ////
         final EditText edittext;
-        final EditText timetext;
-        timetext = (EditText) rootView.findViewById(R.id.eventTimeText);
+        final EditText startText;
+        final EditText endText;
+        startText = (EditText) rootView.findViewById(R.id.eventStartText);
+        endText = (EditText) rootView.findViewById(R.id.eventEndText);
         edittext = (EditText) rootView.findViewById(R.id.eventDateText);
         final Calendar myCalendar = Calendar.getInstance();
 
@@ -87,7 +89,7 @@ public class Create extends Fragment {
             }
         });
 
-        timetext.setOnClickListener(new View.OnClickListener() {
+        startText.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
@@ -99,13 +101,33 @@ public class Create extends Fragment {
                     mTimePicker = new TimePickerDialog(rootView.getContext(), new TimePickerDialog.OnTimeSetListener() {
                         @Override
                         public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                            timetext.setText( "" + selectedHour + ":" + selectedMinute);
+                            startText.setText( "" + selectedHour + ":" + selectedMinute);
                         }
                     }, hour, minute, true);
                     mTimePicker.setTitle("Select Time");
                     mTimePicker.show();
                 }
             });
+
+        endText.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(rootView.getContext(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        endText.setText( "" + selectedHour + ":" + selectedMinute);
+                    }
+                }, hour, minute, true);
+                mTimePicker.setTitle("Select Time");
+                mTimePicker.show();
+            }
+        });
 
         return rootView;
     }
