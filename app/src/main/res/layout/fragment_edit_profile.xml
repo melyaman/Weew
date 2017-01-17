@@ -16,7 +16,8 @@
         android:src="@drawable/profile"
         android:layout_marginTop="25dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background=""/>
 
 
 

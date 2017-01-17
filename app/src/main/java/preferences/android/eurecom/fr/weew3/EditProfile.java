@@ -6,6 +6,8 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.Bundle;
@@ -111,6 +113,8 @@ public class EditProfile extends Fragment {
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
                 startActivityForResult(i, 1);
+
+                myImage.setBackgroundDrawable(new BitmapDrawable(BitmapFactory.decodeFile(prefs.getString(FILEPATH, ""))));
 
             }
         });
