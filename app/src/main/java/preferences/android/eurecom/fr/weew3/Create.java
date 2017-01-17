@@ -46,7 +46,7 @@ public class Create extends Fragment {
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
-        Spinner spinner = (Spinner) rootView.findViewById(R.id.eventTypeSpinner);
+        final Spinner spinner = (Spinner) rootView.findViewById(R.id.eventTypeSpinner);
         spinner.setAdapter(adapter);
         ///// calendar popup ////
         final EditText edittext;
@@ -126,6 +126,10 @@ public class Create extends Fragment {
                 }, hour, minute, true);
                 mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
+                System.out.println(spinner);
+                System.out.println(edittext.getText());
+                System.out.println(startText.getText());
+                System.out.println(endText.getText());
             }
         });
 

@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/text_event_type"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="50dp"
+        android:padding="10dp" />
 
     <Spinner style="@android:style/TextAppearance.Large"
         android:id="@+id/eventTypeSpinner"
@@ -23,14 +24,15 @@
         android:layout_alignParentLeft="true"
         android:entries="@array/event_choices"
         android:layout_below="@id/text_event_type"
-        />
+        android:padding="10dp" />
     <TextView style="@android:style/TextAppearance.Large"
         android:text="Event Date"
         android:textColor="#0000FF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/text_event_date"
-        android:layout_below="@id/eventTypeSpinner"/>
+        android:layout_below="@id/eventTypeSpinner"
+        android:padding="10dp" />
 
     <EditText style="@android:style/TextAppearance.Large"
         android:layout_width="match_parent"
@@ -51,7 +53,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/text_event_start"
-        android:layout_below="@id/eventDateText"/>
+        android:layout_below="@id/eventDateText"
+        android:padding="10dp" />
     <EditText style="@android:style/TextAppearance.Large"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -71,7 +74,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/text_event_end"
-        android:layout_below="@id/eventStartText"/>
+        android:layout_below="@id/eventStartText"
+        android:padding="10dp" />
     <EditText style="@android:style/TextAppearance.Large"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -91,7 +95,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/text_event_description"
-        android:layout_below="@id/eventEndText"/>
+        android:layout_below="@id/eventEndText"
+        android:padding="10dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -103,21 +108,9 @@
         android:layout_marginTop="14dp"
         android:id="@+id/editText"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <EditText style="@android:style/TextAppearance.Large"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/eventLocationText"
-        android:focusable="false"
-        android:drawableLeft="@drawable/ic_clock"
-        android:layout_below="@id/text_event_end"
-        android:ellipsize="start"
-        android:gravity="center"
-        android:hint="Pick End time"
-        android:background="@drawable/edit_text_style"/>
+        android:layout_alignParentEnd="true"
+        android:hint="Write Event Description"
+        android:gravity="center"/>
 
 
 </RelativeLayout>
