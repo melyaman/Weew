@@ -6,7 +6,6 @@
 
     <string name="action_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
@@ -19,4 +18,5 @@
     <string name="btn_logout">LOGOUT</string>
     <string name="name">Fullname</string>
     <string name="title_activity_maps">Map</string>
+    <string name="google_place_api">182723464133-v3ieu0hg5mf3odt0tjjvhgdtbch5psu3.apps.googleusercontent.com</string>
 </resources>

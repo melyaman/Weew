@@ -127,7 +127,7 @@
                 android:gravity="center"/>
 
             <TextView style="@android:style/TextAppearance.Large"
-                android:text="Description"
+                android:text="Location"
                 android:textColor="@color/btn_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -147,16 +147,17 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:hint="Choose Location"
+                android:drawableLeft="@drawable/ic_location_pin"
                 android:gravity="center"/>
+
 
             <Button
                 android:text="Create"
+                android:layout_below="@+id/locationText"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/locationText"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="20dip"
                 android:background="#ea4c88"
                 android:textColor="@color/white"
                 android:layout_width="fill_parent"
@@ -167,3 +168,4 @@
         </RelativeLayout>
 
 </ScrollView>
+

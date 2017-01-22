@@ -1,8 +1,10 @@
 package preferences.android.eurecom.fr.weew3;
 
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.os.Build;
@@ -18,17 +20,29 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
 
 import java.sql.Time;
 import java.util.Locale;
+
+import static android.app.Activity.RESULT_OK;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class Create extends Fragment {
-
-
+    ///// edit texts declaration
+    private EditText edittext;
+    private EditText startText;
+    private EditText endText;
+    private EditText locationText;
+    int PLACE_PICKER_REQUEST = 1;
     public Create() {
         // Required empty public constructor
     }
@@ -39,7 +53,6 @@ public class Create extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        // Inflate the layout for this fragment
         final View rootView = inflater.inflate(R.layout.fragment_create, container, false);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(rootView.getContext(),
                 R.array.event_choices, android.R.layout.simple_spinner_item);
@@ -48,13 +61,13 @@ public class Create extends Fragment {
         // Apply the adapter to the spinner
         final Spinner spinner = (Spinner) rootView.findViewById(R.id.eventTypeSpinner);
         spinner.setAdapter(adapter);
-        ///// calendar popup ////
-        final EditText edittext;
-        final EditText startText;
-        final EditText endText;
+
+
         startText = (EditText) rootView.findViewById(R.id.eventStartText);
         endText = (EditText) rootView.findViewById(R.id.eventEndText);
         edittext = (EditText) rootView.findViewById(R.id.eventDateText);
+        locationText  = (EditText) rootView.findViewById(R.id.locationText);
+
         final Calendar myCalendar = Calendar.getInstance();
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -113,7 +126,7 @@ public class Create extends Fragment {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
+
                 Calendar mcurrentTime = Calendar.getInstance();
                 int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
                 int minute = mcurrentTime.get(Calendar.MINUTE);
@@ -132,7 +145,40 @@ public class Create extends Fragment {
                 System.out.println(endText.getText());
             }
         });
+        // place picker for location
+        locationText.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+                Intent intent;
+                try {
+                    intent = builder.build( getActivity());
+                    startActivityForResult(intent,PLACE_PICKER_REQUEST);
+                } catch (GooglePlayServicesRepairableException e) {
+                    e.printStackTrace();
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
 
         return rootView;
     }
+
+    public void onActivityResult(int requestCode,int resultCode,Intent data){
+
+        if (requestCode == PLACE_PICKER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace( getActivity(),data);
+                String toastMsg = String.format("Place: %s", place.getName());
+                Toast.makeText(getActivity(), toastMsg, Toast.LENGTH_LONG).show();
+                locationText.setText(toastMsg);
+            }
+        }
+    }
+
+
+
 }
