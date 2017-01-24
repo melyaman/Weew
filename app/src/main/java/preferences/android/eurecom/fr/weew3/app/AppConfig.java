@@ -10,4 +10,7 @@ public class AppConfig {
 
     // Server user register url
     public static String URL_REGISTER = "http://172.24.11.157/android_login_api/register.php";
+
+    // Server create event url
+    public static String URL_CREATE_EVENT = "http://172.24.11.157/android_login_api/event_handler.php";
 }

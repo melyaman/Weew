@@ -125,7 +125,7 @@ public class Login extends AppCompatActivity {
                     if (!error) {
                         // user successfully logged in
                         // Create login session
-                        session.setLogin(true);
+                        session.setLogin(true, email);
 
                         // Now store the user in SQLite
                         String uid = jObj.getString("uid");

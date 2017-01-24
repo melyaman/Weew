@@ -1,5 +1,6 @@
 package preferences.android.eurecom.fr.weew3;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,14 +14,29 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import preferences.android.eurecom.fr.weew3.helper.SQLiteHandler;
+import preferences.android.eurecom.fr.weew3.helper.SessionManager;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private SQLiteHandler db;
+    private SessionManager session;
+
+
 
     NavigationView navigationView = null;
     Toolbar toolbar = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // SqLite database handler
+        db = new SQLiteHandler(getApplicationContext());
+
+        // session manager
+        session = new SessionManager(getApplicationContext());
+
         setContentView(R.layout.activity_main);
         // set the fragment when app start to Events ( Or map ?? ) fragment
         Events events_fragment = new Events();
@@ -119,13 +135,26 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.commit();
 
         } else if (id == R.id.nav_about_us) {
+            Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_policy ){
-
+            logoutUser();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    private void logoutUser() {
+        session.setLogin(false, "");
+
+        db.deleteUsers();
+
+        // Launching the login activity
+        Intent intent = new Intent(MainActivity.this, Login.class);
+        startActivity(intent);
+        finish();
+    }
+
 }

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import java.util.HashMap;
+
 /**
  * Created by aabdelli on 02/01/2017.
  */
@@ -21,10 +23,15 @@ public class SessionManager {
     // Shared pref mode
     int PRIVATE_MODE = 0;
 
+
     // Shared preferences file name
     private static final String PREF_NAME = "WeeWLogin";
 
     private static final String KEY_IS_LOGGEDIN = "isLoggedIn";
+
+    // Email address (make variable public to access from outside)
+    public static final String KEY_EMAIL = "email";
+
 
     public SessionManager(Context context) {
         this._context = context;
@@ -32,11 +39,25 @@ public class SessionManager {
         editor = pref.edit();
     }
 
-    public void setLogin(boolean isLoggedIn) {
+    /**
+     * Get stored session data
+     * */
+    public HashMap<String, String> getUserDetails(){
+        HashMap<String, String> user = new HashMap<String, String>();
+
+        // user email id
+        user.put(KEY_EMAIL, pref.getString(KEY_EMAIL, null));
+
+        // return user
+        return user;
+    }
+
+    public void setLogin(boolean isLoggedIn, String email) {
 
         editor.putBoolean(KEY_IS_LOGGEDIN, isLoggedIn);
 
         // commit changes
+        editor.putString("email", email);
         editor.commit();
 
         Log.d(TAG, "User login session modified!");
