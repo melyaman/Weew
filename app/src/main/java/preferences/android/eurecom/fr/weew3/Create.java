@@ -200,7 +200,6 @@ public class Create extends Fragment {
         // Submit Event Button Click event
         btnSubmitEvent.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                System.out.println("here here here");
                 // get user data from session
                 HashMap<String, String> user = session.getUserDetails();
 

@@ -1,39 +1,229 @@
 package preferences.android.eurecom.fr.weew3;
 
 
+import android.app.ProgressDialog;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import preferences.android.eurecom.fr.weew3.app.AppConfig;
+import preferences.android.eurecom.fr.weew3.app.AppController;
+import preferences.android.eurecom.fr.weew3.app.CustomAdapter;
+import preferences.android.eurecom.fr.weew3.app.ListModel;
+
+import static com.google.android.gms.wearable.DataMap.TAG;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class Events extends Fragment  {
+    private ProgressDialog pDialog;
 
+    int test = 0;
+    ListView list;
+    CustomAdapter adapter;
+    public  Events CustomListView = null;
+    //JSONArray eventsListJson = new JSONArray();
+    public ArrayList<ListModel> CustomListViewValuesArr = new ArrayList<ListModel>();
 
     public Events() {
         // Required empty public constructor
-
     }
-    //Spinner spinner = (Spinner) view.findViewById(R.id.eventTypeSpinner);
-    // Create an ArrayAdapter using the string array and a default spinner layout
 
-    public void onItemSelected(AdapterView<?> parent, View view,
-                               int pos, long id) {
-        // An item was selected. You can retrieve the selected item using
-        // parent.getItemAtPosition(pos)
-    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        final View rootView = inflater.inflate(R.layout.fragment_events, container, false);
 
-        return inflater.inflate(R.layout.fragment_events, container, false);
+        // Progress dialog
+        pDialog = new ProgressDialog(rootView.getContext());
+        pDialog.setCancelable(false);
+
+        getAllEvents("allEvents") ;
+
+//        if (eventsListJson == null ){
+//            System.out.println("chay");
+//        }
+//
+//        try {
+//            setListData();
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        Resources res = getResources();
+//        list = ( ListView )rootView.findViewById( R.id.list );  // List defined in XML ( See Below )
+//
+//        /**************** Create Custom Adapter *********/
+//        adapter=new CustomAdapter( getActivity(), CustomListViewValuesArr,res );
+//        list.setAdapter( adapter );
+//
+        return rootView;
     }
 
+    /**
+     * Function to store user in MySQL database will post params(tag, name,
+     * email, password) to register url
+     * */
+
+
+
+    private void getAllEvents(final String getAllEvents) {
+        // Tag used to cancel the request
+        String tag_string_req = "req_get_all_events_json";
+
+        pDialog.setMessage("Getting Event ...");
+        showDialog();
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_CREATE_EVENT, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Get Events Response: " + response.toString());
+                hideDialog();
+
+                try {
+                    JSONArray jObj = new JSONArray(response);
+                    boolean error = jObj.length()<1;
+                    if (!error) {
+                        System.out.println("why not enterinjg");
+                        setListData(jObj);
+                        Resources res = getResources();
+                        list = ( ListView )getActivity().findViewById( R.id.list );  // List defined in XML ( See Below )
+
+                        /**************** Create Custom Adapter *********/
+                        adapter=new CustomAdapter( getActivity(), CustomListViewValuesArr,res );
+                        list.setAdapter( adapter );
+
+                        // Event successfully stored in MySQL
+                        // Now store the event in sqlite
+
+
+                        //JSONObject event = jObj.getJSONObject("events");
+
+//                        String evid = event.getString("evid");
+//                        String email = event.getString("email");
+//                        String event_date = event.getString("event_date");
+//                        String event_type = event.getString("event_type");
+//                        float loc_lat = (float) event.getDouble("loc_lat");
+//                        float loc_long = (float) event.getDouble("loc_long");
+//                        String picture = event.getString("picture");
+//                        String time_begin = event.getString("time_begin");
+//                        String time_end = event.getString("time_end");
+//                        String description = event.getString("description");
+
+                        Toast.makeText(getActivity().getApplicationContext(), "Events successfully fetched.", Toast.LENGTH_LONG).show();
+
+                        // Launch another fragment
+//                        Events fragment = new Events();
+//                        android.support.v4.app.FragmentTransaction fragmentTransaction =
+//                                getActivity().getSupportFragmentManager().beginTransaction();
+//                        fragmentTransaction.replace(R.id.fragment_container,fragment);
+//                        fragmentTransaction.commit();
+
+                    } else {
+
+                        // Error occurred in submitting. Get the error
+                        // message
+                        String errorMsg = jObj.getString(0);
+                        Toast.makeText(getActivity().getApplicationContext(),
+                                errorMsg, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Event fetch Error: " + error.getMessage());
+                Toast.makeText(getActivity().getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+                hideDialog();
+            }
+        }) {
+
+            @Override
+            protected java.util.Map<String, String> getParams() {
+                // Posting params to add event url
+                java.util.Map<String, String> params = new HashMap<String, String>();
+                params.put("allEvents", getAllEvents);
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+    private void showDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
+
+    private void hideDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
+    }
+
+    /****** Function to set data in ArrayList *************/
+    public void setListData( JSONArray eventsListJson) throws JSONException {
+
+        for (int i = 0; i < eventsListJson.length(); i++) {
+            System.out.println("d5alt d5alt d5alt");
+            final ListModel sched = new ListModel();
+            JSONObject rec = eventsListJson.getJSONObject(i);
+            /******* Firstly take data in model object ******/
+
+            sched.setEvent_type(rec.getString("event_type"));
+            sched.setTime_begin(rec.getString("time_begin"));
+            sched.setTime_end(rec.getString("time_end"));
+
+            /******** Take Model Object in ArrayList **********/
+            CustomListViewValuesArr.add( sched );
+        }
+
+    }
+
+
+//    /*****************  This function used by adapter ****************/
+//    public void onItemClick(int mPosition)
+//    {
+//        ListModel eventsValues = (ListModel) CustomListViewValuesArr.get(mPosition);
+//
+//
+//        // SHOW ALERT
+//
+//        Toast.makeText(CustomListView,
+//                ""+eventsValues.getCompanyName()
+//                        +"
+//                Image:"+tempValues.getImage()
+//            +"
+//        Url:"+tempValues.getUrl(),
+//        Toast.LENGTH_LONG)
+//        .show();
+//    }
 }

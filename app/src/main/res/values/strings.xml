@@ -19,4 +19,17 @@
     <string name="name">Fullname</string>
     <string name="title_activity_maps">Map</string>
     <string name="google_place_api">182723464133-v3ieu0hg5mf3odt0tjjvhgdtbch5psu3.apps.googleusercontent.com</string>
+
+    <string-array name="Planets">
+        <item>Sun</item>
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Jupiter</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
+    </string-array>
+
 </resources>
