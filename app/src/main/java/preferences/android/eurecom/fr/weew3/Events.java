@@ -107,7 +107,6 @@ public class Events extends Fragment  {
                     JSONArray jObj = new JSONArray(response);
                     boolean error = jObj.length()<1;
                     if (!error) {
-                        System.out.println("why not enterinjg");
                         setListData(jObj);
                         Resources res = getResources();
                         list = ( ListView )getActivity().findViewById( R.id.list );  // List defined in XML ( See Below )
@@ -116,31 +115,7 @@ public class Events extends Fragment  {
                         adapter=new CustomAdapter( getActivity(), CustomListViewValuesArr,res );
                         list.setAdapter( adapter );
 
-                        // Event successfully stored in MySQL
-                        // Now store the event in sqlite
-
-
-                        //JSONObject event = jObj.getJSONObject("events");
-
-//                        String evid = event.getString("evid");
-//                        String email = event.getString("email");
-//                        String event_date = event.getString("event_date");
-//                        String event_type = event.getString("event_type");
-//                        float loc_lat = (float) event.getDouble("loc_lat");
-//                        float loc_long = (float) event.getDouble("loc_long");
-//                        String picture = event.getString("picture");
-//                        String time_begin = event.getString("time_begin");
-//                        String time_end = event.getString("time_end");
-//                        String description = event.getString("description");
-
                         Toast.makeText(getActivity().getApplicationContext(), "Events successfully fetched.", Toast.LENGTH_LONG).show();
-
-                        // Launch another fragment
-//                        Events fragment = new Events();
-//                        android.support.v4.app.FragmentTransaction fragmentTransaction =
-//                                getActivity().getSupportFragmentManager().beginTransaction();
-//                        fragmentTransaction.replace(R.id.fragment_container,fragment);
-//                        fragmentTransaction.commit();
 
                     } else {
 
@@ -193,7 +168,6 @@ public class Events extends Fragment  {
     public void setListData( JSONArray eventsListJson) throws JSONException {
 
         for (int i = 0; i < eventsListJson.length(); i++) {
-            System.out.println("d5alt d5alt d5alt");
             final ListModel sched = new ListModel();
             JSONObject rec = eventsListJson.getJSONObject(i);
             /******* Firstly take data in model object ******/
@@ -201,6 +175,7 @@ public class Events extends Fragment  {
             sched.setEvent_type(rec.getString("event_type"));
             sched.setTime_begin(rec.getString("time_begin"));
             sched.setTime_end(rec.getString("time_end"));
+            sched.setEvent_date(rec.getString("event_date"));
 
             /******** Take Model Object in ArrayList **********/
             CustomListViewValuesArr.add( sched );
