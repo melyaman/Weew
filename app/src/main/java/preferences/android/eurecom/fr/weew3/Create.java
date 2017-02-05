@@ -99,7 +99,7 @@ public class Create extends Fragment {
 
 
         // SQLite database handler
-        db = new SQLiteEventHandler(getActivity().getApplicationContext());
+        //db = new SQLiteEventHandler(getActivity().getApplicationContext());
 
         final Calendar myCalendar = Calendar.getInstance();
 
@@ -216,7 +216,7 @@ public class Create extends Fragment {
                 Float loc_lat =  Float.parseFloat(event_location.split(",")[0]);
                 Float loc_long =  Float.parseFloat(event_location.split(",")[1]);
                 String picture = "000000000000000001";
-                System.out.println(email + event_type + event_date + time_begin + time_end + description + event_location + picture);
+                //System.out.println("-*-*-*-*-*-* : I need this one to know if tthis is the problem : " +event_location +":"+loc_lat +" , "+ loc_long);
 
                 if (!event_type.isEmpty() && !event_date.isEmpty() && !time_begin.isEmpty()) {
                     addEvent(email, event_date, event_type, loc_lat, loc_long, picture, time_begin, time_end, description);
@@ -236,7 +236,7 @@ public class Create extends Fragment {
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(getActivity().getApplicationContext(), data);
-                System.out.println("------***************---------- "+place.getAddress().toString()+ (place.getLatLng()).getClass());
+                System.out.println("------***************-------- "+place.getAddress().toString());
                 //String toastMsg = String.format("Place: %s", place.getName());
                 String toastMsg = Double.toString(place.getLatLng().latitude)+ ","+ Double.toString(place.getLatLng().longitude)  ;
                 Toast.makeText(getActivity(), toastMsg, Toast.LENGTH_LONG).show();
@@ -270,7 +270,6 @@ public class Create extends Fragment {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
                     if (!error) {
-                        System.out.println("why not enterinjg");
                         // Event successfully stored in MySQL
                         // Now store the event in sqlite
 
@@ -289,7 +288,7 @@ public class Create extends Fragment {
                         String description = event.getString("description");
 
                         // Inserting row in events table
-                        db.addEvent(evid, email, event_date, event_type, loc_lat, loc_long, picture, time_begin, time_end, description);
+                        //db.addEvent(evid, email, event_date, event_type, loc_lat, loc_long, picture, time_begin, time_end, description);
 
                         Toast.makeText(getActivity().getApplicationContext(), "Event successfully submitted.", Toast.LENGTH_LONG).show();
 

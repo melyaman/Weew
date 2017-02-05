@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import preferences.android.eurecom.fr.weew3.Events;
+import preferences.android.eurecom.fr.weew3.MainActivity;
 import preferences.android.eurecom.fr.weew3.R;
 
 /********* Adapter class extends with BaseAdapter and implements with OnClickListener ************/
@@ -116,7 +118,7 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
 
             /******** Set Item Click Listner for LayoutInflater for each row *******/
 
-            //vi.setOnClickListener(new OnItemClickListener( position ));
+            vi.setOnClickListener(new OnItemClickListener( position ));
         }
         return vi;
     }
@@ -126,23 +128,19 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
         Log.v("CustomAdapter", "=====Row button clicked=====");
     }
 
-//    /********* Called when Item click in ListView ************/
-//    private class OnItemClickListener  implements View.OnClickListener {
-//        private int mPosition;
-//
-//        OnItemClickListener(int position){
-//            mPosition = position;
-//        }
-//
-//        @Override
-//        public void onClick(View arg0) {
-//
-//
-//            CustomListViewAndroidExample sct = (CustomListViewAndroidExample)activity;
-//
-//            /****  Call  onItemClick Method inside CustomListViewAndroidExample Class ( See Below )****/
-//
-//            sct.onItemClick(mPosition);
-//        }
-//    }
+    /********* Called when Item click in ListView ************/
+    private class OnItemClickListener  implements View.OnClickListener {
+        private int mPosition;
+
+        OnItemClickListener(int position){
+            mPosition = position;
+        }
+
+        @Override
+        public void onClick(View arg0) {
+
+            Events fragment = new Events();
+            fragment.onItemClick(mPosition);
+        }
+    }
 }

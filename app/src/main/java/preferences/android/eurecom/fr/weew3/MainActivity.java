@@ -14,6 +14,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import preferences.android.eurecom.fr.weew3.helper.SQLiteHandler;
 import preferences.android.eurecom.fr.weew3.helper.SessionManager;
 
@@ -22,7 +25,7 @@ public class MainActivity extends AppCompatActivity
 
     private SQLiteHandler db;
     private SessionManager session;
-
+    public JSONArray EventList = new JSONArray();
 
 
     NavigationView navigationView = null;
@@ -92,7 +95,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logout) {
+            logoutUser();
             return true;
         }
 
@@ -126,6 +130,11 @@ public class MainActivity extends AppCompatActivity
                     getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container,fragment);
             fragmentTransaction.commit();
+            try {
+                System.out.println("This is what I hope to have: "+ EventList.getJSONObject(0).getString("event_type"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
         } else if (id == R.id.nav_editProfile) {
             EditProfile fragment = new EditProfile();
@@ -135,11 +144,10 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.commit();
 
         } else if (id == R.id.nav_about_us) {
-            Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+//            startActivity(intent);
 
         } else if (id == R.id.nav_policy ){
-            logoutUser();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

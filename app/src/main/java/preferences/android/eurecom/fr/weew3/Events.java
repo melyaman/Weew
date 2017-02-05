@@ -37,7 +37,7 @@ import static com.google.android.gms.wearable.DataMap.TAG;
  */
 public class Events extends Fragment  {
     private ProgressDialog pDialog;
-
+    public MainActivity homeActivity;
     int test = 0;
     ListView list;
     CustomAdapter adapter;
@@ -62,22 +62,6 @@ public class Events extends Fragment  {
 
         getAllEvents("allEvents") ;
 
-//        if (eventsListJson == null ){
-//            System.out.println("chay");
-//        }
-//
-//        try {
-//            setListData();
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//        Resources res = getResources();
-//        list = ( ListView )rootView.findViewById( R.id.list );  // List defined in XML ( See Below )
-//
-//        /**************** Create Custom Adapter *********/
-//        adapter=new CustomAdapter( getActivity(), CustomListViewValuesArr,res );
-//        list.setAdapter( adapter );
-//
         return rootView;
     }
 
@@ -115,6 +99,9 @@ public class Events extends Fragment  {
                         adapter=new CustomAdapter( getActivity(), CustomListViewValuesArr,res );
                         list.setAdapter( adapter );
 
+                        homeActivity = (MainActivity) getActivity();
+                        //Below is where you get a variable from the main activity
+                        homeActivity.EventList = jObj;
                         Toast.makeText(getActivity().getApplicationContext(), "Events successfully fetched.", Toast.LENGTH_LONG).show();
 
                     } else {
@@ -185,20 +172,13 @@ public class Events extends Fragment  {
 
 
 //    /*****************  This function used by adapter ****************/
-//    public void onItemClick(int mPosition)
-//    {
-//        ListModel eventsValues = (ListModel) CustomListViewValuesArr.get(mPosition);
-//
-//
-//        // SHOW ALERT
-//
-//        Toast.makeText(CustomListView,
-//                ""+eventsValues.getCompanyName()
-//                        +"
-//                Image:"+tempValues.getImage()
-//            +"
-//        Url:"+tempValues.getUrl(),
-//        Toast.LENGTH_LONG)
-//        .show();
-//    }
+    public void onItemClick(int mPosition)
+    {
+        //ListModel eventsValues = (ListModel) CustomListViewValuesArr.get(mPosition);
+
+        System.out.println("Item selected"+ mPosition);
+        // SHOW ALERT
+
+        //Toast.makeText(getActivity(),"why",Toast.LENGTH_LONG).show();
+    }
 }

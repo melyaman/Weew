@@ -36,6 +36,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,6 +56,8 @@ public class Map extends Fragment implements
     Location mLastLocation;
     Marker mCurrLocationMarker;
     LocationRequest mLocationRequest;
+    public MainActivity homeActivity;
+    JSONArray eventsListJson = new JSONArray();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -86,6 +92,26 @@ public class Map extends Fragment implements
                 else {
                     buildGoogleApiClient();
                     mMap.setMyLocationEnabled(true);
+                }
+                homeActivity = (MainActivity) getActivity();
+                //Below is where you get a variable from the main activity
+                eventsListJson = homeActivity.EventList;
+                System.out.println("nchallah famma 7aja"+eventsListJson.length());
+                // Place all markers:
+                for (int i = 0; i < eventsListJson.length(); i++) {
+                    try {
+                        JSONObject event = eventsListJson.getJSONObject(i);
+                        MarkerOptions markerOptions = new MarkerOptions();
+                        LatLng latLng = new LatLng(event.getDouble("loc_lat"), event.getDouble("loc_long"));
+                        markerOptions.position(latLng);
+                        markerOptions.title(event.getString("description"));
+                        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+                        mMap.addMarker(markerOptions);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
                 }
             }
 
@@ -179,41 +205,6 @@ public class Map extends Fragment implements
         }
 
     }
-    public void animateMarker(final Marker marker, final Location location) {
-        final Handler handler = new Handler();
-        final long start = SystemClock.uptimeMillis();
-        final LatLng startLatLng = marker.getPosition();
-        final double startRotation = marker.getRotation();
-        final long duration = 500;
-
-        final Interpolator interpolator = new LinearInterpolator();
-
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                long elapsed = SystemClock.uptimeMillis() - start;
-                float t = interpolator.getInterpolation((float) elapsed
-                        / duration);
-
-                double lng = t * location.getLongitude() + (1 - t)
-                        * startLatLng.longitude;
-                double lat = t * location.getLatitude() + (1 - t)
-                        * startLatLng.latitude;
-
-                float rotation = (float) (t * location.getBearing() + (1 - t)
-                        * startRotation);
-
-                marker.setPosition(new LatLng(lat, lng));
-                marker.setRotation(rotation);
-
-                if (t < 1.0) {
-                    // Post again 16ms later.
-                    handler.postDelayed(this, 16);
-                }
-            }
-        });
-    }
-
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
 
