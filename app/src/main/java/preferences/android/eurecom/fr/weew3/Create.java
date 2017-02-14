@@ -286,7 +286,7 @@ public class Create extends Fragment {
                         String time_begin = event.getString("time_begin");
                         String time_end = event.getString("time_end");
                         String description = event.getString("description");
-
+                        String members = event.getString("members");
                         // Inserting row in events table
                         //db.addEvent(evid, email, event_date, event_type, loc_lat, loc_long, picture, time_begin, time_end, description);
 
@@ -336,6 +336,7 @@ public class Create extends Fragment {
                 params.put("time_begin", time_begin);
                 params.put("time_end", time_end);
                 params.put("description", description);
+                params.put("members", email);
 
                 return params;
             }

@@ -1,9 +1,17 @@
 package preferences.android.eurecom.fr.weew3;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,10 +21,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.util.HashMap;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 import preferences.android.eurecom.fr.weew3.helper.SQLiteHandler;
 import preferences.android.eurecom.fr.weew3.helper.SessionManager;
 
@@ -27,8 +40,10 @@ public class MainActivity extends AppCompatActivity
     private SessionManager session;
     public JSONArray EventList = new JSONArray();
 
-
+    TextView userName;
+    ImageView userImage;
     NavigationView navigationView = null;
+
     Toolbar toolbar = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +51,8 @@ public class MainActivity extends AppCompatActivity
 
         // SqLite database handler
         db = new SQLiteHandler(getApplicationContext());
+
+
 
         // session manager
         session = new SessionManager(getApplicationContext());
@@ -66,8 +83,30 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+
+
+
+
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View header=navigationView.getHeaderView(0);
+
+        SharedPreferences prefs;
+        prefs = this.getSharedPreferences("WeeWLogin", Context.MODE_PRIVATE);
+        String previouslyEncodedImage = prefs.getString("image_data", "");
+        //Log.i("show: ",previouslyEncodedImage);
+        if( !previouslyEncodedImage.equalsIgnoreCase("") ){
+            byte[] b = Base64.decode(previouslyEncodedImage, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
+            Log.i("show here : ",bitmap.toString());
+            HashMap<String, String> user = session.getUserDetails();
+            userImage = (CircleImageView)  header.findViewById(R.id.profile_image);
+            userName = (TextView) header.findViewById(R.id.email);
+            Drawable d = new BitmapDrawable(getResources(), bitmap);
+            userImage.setImageDrawable(d);
+            userName.setText(user.get(SessionManager.KEY_EMAIL));
+        }
+
     }
 
     @Override

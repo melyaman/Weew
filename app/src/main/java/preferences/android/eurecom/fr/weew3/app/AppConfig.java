@@ -15,4 +15,6 @@ public class AppConfig {
 
     // Server create event url
     public static String URL_CREATE_EVENT = "http://192.168.1.80/android_login_api/event_handler.php";
+
+    public static String URL_UPDATE_USER = "http://192.168.1.80/android_login_api/update_user.php";
 }

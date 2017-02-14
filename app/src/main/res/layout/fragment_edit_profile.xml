@@ -7,15 +7,7 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <ImageButton android:id="@+id/myButton"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:src="@drawable/profile"
-        android:layout_marginTop="25dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        />
-
+    <!--android:src="@drawable/profile"-->
 
 
     <Button
@@ -29,28 +21,15 @@
         android:layout_height="wrap_content"
         android:id="@+id/submit" />
 
-    <EditText
-        android:background="@color/input_register_bg"
-        android:padding="10dp"
-        android:singleLine="true"
-        android:textColor="@color/input_register"
-        android:textColorHint="@color/input_register_hint"
-        android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
-        android:layout_marginBottom="33dp"
-        android:inputType="textPersonName"
-        android:text="New Username"
-        android:ems="10"
-        android:id="@+id/new_username"
-        android:layout_above="@+id/new_password"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="13dp"
-        android:layout_marginEnd="13dp" />
+    <ImageButton android:id="@+id/myButton"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="24dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:background="@color/input_register_bg"
-        android:text="New Password"
         android:ems="10"
         android:id="@+id/new_password"
         android:padding="10dp"
@@ -59,8 +38,41 @@
         android:textColorHint="@color/input_register_hint"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:layout_marginBottom="12dp"
+        android:hint="New Password"
         android:layout_above="@+id/submit"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:background="@color/input_register_bg"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textColor="@color/input_register"
+        android:textColorHint="@color/input_register_hint"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/new_username"
+        android:hint="New Username"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/myButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:background="@color/input_register_bg"
+        android:ems="10"
+        android:id="@+id/old_password"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textColor="@color/input_register"
+        android:textColorHint="@color/input_register_hint"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:hint="Old Password"
+        android:layout_marginTop="58dp"
+        android:layout_below="@+id/new_username"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
