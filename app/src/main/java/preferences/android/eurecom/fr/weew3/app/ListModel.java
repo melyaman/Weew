@@ -5,6 +5,8 @@ package preferences.android.eurecom.fr.weew3.app;
  */
 public class ListModel {
 
+    private String evid= "";
+    private String members= "";
     private String email= "";
     private String event_type= "";
     private String event_date= "";
@@ -17,6 +19,14 @@ public class ListModel {
 
     public String getEvent_type() {
         return event_type;
+    }
+
+    public String getEvent_id() {
+        return evid;
+    }
+
+    public String getEvent_members() {
+        return members;
     }
 
     public String getEvent_date() {
@@ -81,6 +91,14 @@ public class ListModel {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public void setEventId(String evid) {
+        this.evid = evid;
+    }
+
+    public void setMembers(String members) {
+        this.members = members;
     }
 
     public String getEmail() {

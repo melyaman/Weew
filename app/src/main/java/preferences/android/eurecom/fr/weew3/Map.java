@@ -104,9 +104,11 @@ public class Map extends Fragment implements
                         MarkerOptions markerOptions = new MarkerOptions();
                         LatLng latLng = new LatLng(event.getDouble("loc_lat"), event.getDouble("loc_long"));
                         markerOptions.position(latLng);
-                        markerOptions.title(event.getString("description"));
+                        markerOptions.title("Event Description: "+event.getString("description")+"\n"+
+                                "Created By: "+event.getString("email")
+                        );
                         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-                        mMap.addMarker(markerOptions);
+                        mMap.addMarker(markerOptions).showInfoWindow();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -275,4 +277,6 @@ public class Map extends Fragment implements
             // You can add here other case statements according to your requirement.
         }
     }
+
 }
+

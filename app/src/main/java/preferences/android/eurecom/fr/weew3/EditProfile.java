@@ -103,8 +103,9 @@ public class EditProfile extends Fragment {
         userName = (TextView) header.findViewById(R.id.email);
 
         btnSubmit = (Button) rView.findViewById(R.id.submit);
-
-
+        session = new SessionManager(getActivity().getApplicationContext());
+        pDialog = new ProgressDialog(rView.getContext());
+        pDialog.setCancelable(false);
 
         myImage.setOnClickListener(new View.OnClickListener() {
 
@@ -241,36 +242,40 @@ public class EditProfile extends Fragment {
                 Log.d(TAG, "Updating User Response: " + response.toString());
                 hideDialog();
 
-                try {
-                    JSONObject jObj = new JSONObject(response);
-                    boolean error = jObj.getBoolean("error");
-                    if (!error) {
-                        // Event successfully stored in MySQL
-                        // Now store the event in sqlite
+                Toast.makeText(getActivity().getApplicationContext(), "User successfully modified.", Toast.LENGTH_LONG).show();
 
+                // Launch event fragment
+                Events fragment = new Events();
+                android.support.v4.app.FragmentTransaction fragmentTransaction =
+                        getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container,fragment);
+                fragmentTransaction.commit();
 
-                        JSONObject user = jObj.getJSONObject("user");
-
-                        Toast.makeText(getActivity().getApplicationContext(), "User successfully modified.", Toast.LENGTH_LONG).show();
-
-                        // Launch event fragment
-                        Events fragment = new Events();
-                        android.support.v4.app.FragmentTransaction fragmentTransaction =
-                                getActivity().getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment_container,fragment);
-                        fragmentTransaction.commit();
-
-                    } else {
-
-                        // Error occurred in submitting. Get the error
-                        // message
-                        String errorMsg = jObj.getString("old password is wrong");
-                        Toast.makeText(getActivity().getApplicationContext(),
-                                errorMsg, Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+//                try {
+////                    JSONObject jObj = new JSONObject(response);
+////                    boolean error = jObj.getBoolean("error");
+//                    JSONObject jObj = new JSONObject(response);
+//                    boolean error = jObj.getBoolean("error");
+//                    if (!error) {
+//                        // Event successfully stored in MySQL
+//                        // Now store the event in sqlite
+//
+//                        System.out.println("Ïmin *****");
+//                        //JSONObject user = jObj.getJSONObject("user");
+//
+//
+//
+//                    } else {
+//
+//                        // Error occurred in submitting. Get the error
+//                        // message
+//                        String errorMsg = jObj.getString("old password is wrong");
+//                        Toast.makeText(getActivity().getApplicationContext(),
+//                                errorMsg, Toast.LENGTH_LONG).show();
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
 
             }
         }, new Response.ErrorListener() {

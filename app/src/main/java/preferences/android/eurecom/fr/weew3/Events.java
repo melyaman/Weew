@@ -163,6 +163,9 @@ public class Events extends Fragment  {
             sched.setTime_begin(rec.getString("time_begin"));
             sched.setTime_end(rec.getString("time_end"));
             sched.setEvent_date(rec.getString("event_date"));
+            sched.setEventId(rec.getString("evid"));
+            sched.setEmail(rec.getString("email"));
+            sched.setMembers(rec.getString("members"));
 
             /******** Take Model Object in ArrayList **********/
             CustomListViewValuesArr.add( sched );
@@ -180,5 +183,67 @@ public class Events extends Fragment  {
         // SHOW ALERT
 
         //Toast.makeText(getActivity(),"why",Toast.LENGTH_LONG).show();
+    }
+
+    public void onItemJoinClick(int mPosition) throws JSONException {
+        //ListModel eventsValues = (ListModel) CustomListViewValuesArr.get(mPosition);
+
+        System.out.println("Item join: ---> "+ mPosition);
+        System.out.println(homeActivity.EventList.length());
+        updateEvent(  homeActivity.EventList.getJSONObject(mPosition).getString("evid"),
+                homeActivity.EventList.getJSONObject(mPosition).getString("email"));
+        // SHOW ALERT
+
+        //Toast.makeText(getActivity(),"why",Toast.LENGTH_LONG).show();
+    }
+
+    private void updateEvent(final String email, final String evid) {
+        // Tag used to cancel the request
+        String tag_string_req = "req_join_event";
+        pDialog.setMessage("Joining the event ...");
+        showDialog();
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_UPDATE_EVENT, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Joining Event Response: " + response.toString());
+                hideDialog();
+
+                Toast.makeText(getActivity().getApplicationContext(), "Event successfully Joined.", Toast.LENGTH_LONG).show();
+
+                // Launch event fragment
+//                Events fragment = new Events();
+//                android.support.v4.app.FragmentTransaction fragmentTransaction =
+//                        getActivity().getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.fragment_container,fragment);
+//                fragmentTransaction.commit();
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Joining Event Error: " + error.getMessage());
+                Toast.makeText(getActivity().getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+                hideDialog();
+            }
+        }) {
+
+            @Override
+            protected java.util.Map<String, String> getParams() {
+                // Posting params to add event url
+                java.util.Map<String, String> params = new HashMap<String, String>();
+                params.put("email", email);
+                params.put("evid", evid);
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 }
